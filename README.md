@@ -27,12 +27,8 @@ kubectl get pods,svc -n custom-ui
 ## 4. Update the flowURL parameter on the AuthHub application you will be using
 
 {
-
-  ...
-  
+  ... 
   "flowURL": "http://\<ip addr for auth.customui.com above\>/login",
-  
   ...
-
 }
   
