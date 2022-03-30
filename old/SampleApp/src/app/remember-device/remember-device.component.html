@@ -1,9 +1,0 @@
-<div class="rememberDeviceContainer" *ngIf="globalService.isRememberDeviceEnabled()">
-  <label class="rememberdevice-label" for="rememberDevice" (mousedown)="handleMouseDown($event)">
-    <input class="checkbox rememberThisDeviceCheckbox" type="checkbox" id="rememberDevice" name="rememberDevice" [(ngModel)]="rdService.rememberDeviceChecked">
-    <span>Remember this device
-      <img src="assets/help-icon.svg" title="You will not be prompted for multi-factor authentication again." (click)="tooltipClick($event)" />
-    </span>
-  </label>
-  <br />
-</div>
