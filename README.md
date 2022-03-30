@@ -27,7 +27,7 @@ kubectl get pods,svc -n custom-ui
 
 { 
   ...
-  "flowURL": "http://<ip addr for auth.customui.com above>/login",
+  "flowURL": "http://\<ip addr for auth.customui.com above\>/login",
   ...
 }
   
