@@ -9,13 +9,13 @@
 
 ## 2. Install 
 
-kubectl create ns custom-ui
+> kubectl create ns custom-ui
 
-helm install custom-ui ah-custom-ui/custom-ui -n custom-ui
+> helm install custom-ui ah-custom-ui/custom-ui -n custom-ui
 
 ....Wait for the Pods and Services to complete startup. This could take several minutes 
 
-kubectl get pods,svc -n custom-ui
+> kubectl get pods,svc -n custom-ui
 
 
 ## 3. Update your DNS or hosts file with the following
