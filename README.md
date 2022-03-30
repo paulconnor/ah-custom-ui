@@ -1,5 +1,11 @@
 # Helm Chart for AuthHub Sample Custom UI for authentication via flowURL
 
+## ASSUMPTIONS:
+- To be used to add second factor AuthN to Siteminder protected resources.
+- AuthHub policy will include SMSOTP for second factor only
+- User credentials exist for SMSOTP
+
+
 ## 1. Add the Helm Chart and deploy
 
 > helm repo add ah-custom-ui https://paulconnor.github.io/ah-custom-ui/
