@@ -2,18 +2,22 @@
 
 ## ASSUMPTIONS:
 - To be used to add second factor AuthN to Siteminder protected resources.
-- AuthHub policy will include SMSOTP for second factor only
 - User credentials exist for SMSOTP
-- AuthHub application to be used has clientCredentials grant and similar Authorization rights as the demoClient.
 
-## 1. Add the Helm Chart and deploy
+
+## 1. Create AuthHub application and policy for the custom-ui application  
+
+- AuthHub application: clientCredentials grant and similar Authorization rights as the demoClient.  
+- AuthHub policy: include SMSOTP for second factor only  
+
+## 2. Add the Helm Chart and deploy
 
 > helm repo add ah-custom-ui https://paulconnor.github.io/ah-custom-ui/
 
 > helm repo update
 
 
-## 2. Install 
+## 3. Install 
 
 > kubectl create ns custom-ui
 
