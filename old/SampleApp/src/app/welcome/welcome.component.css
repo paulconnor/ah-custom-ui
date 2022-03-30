@@ -1,0 +1,116 @@
+#investmentAccounts h2 {
+  margin-top: 55px;
+}
+
+#investmentAccounts hr:first-of-type {
+  background-color: lightgrey;
+  height: 3px;
+  margin-top: -10px;
+  margin-bottom: 15px;
+}
+
+#investmentAccounts a {
+  font-size: 22px;
+  margin-right: 0;
+  margin-left: 5px;
+}
+
+#investmentAccounts span {
+  margin-top: 14px;
+  float: right;
+  margin-right: 25px;
+  font-size: 20px;
+}
+
+#investmentAccounts p {
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+#investmentAccounts hr {
+  margin-top: 14px;
+}
+
+.rightHome {
+  float: left;
+  width: 35%;
+}
+
+.rightHomeUpper {
+  margin-left: 75px;
+}
+
+.eBills {
+  border-radius: 2px;
+  height: 45px;
+  margin-top: 85px;
+  background: #4676b9;
+  background-color: #4676b9;
+  color: white;
+}
+
+.eBills h2 {
+  margin-left: 15px;
+  padding: 7px;
+  font-size: 22px;
+}
+
+.rightHomeUpper p {
+  font-size: 15px;
+  margin-left: 15px;
+  padding: 15px;
+}
+
+.rightHomeBelow {
+  margin-left: 75px;
+  margin-top: 25px;
+}
+
+.rightHomeBelow img {
+  width: 421px;
+}
+
+#container {
+  display: block;
+  block-size: fit-content(300px) fit-content(300px) 1fr;
+  box-sizing: border-box;
+  height: 200px;
+  width: calc(100% - 40px);
+  padding: 15px;
+  word-wrap: break-word;
+  overflow-y: scroll;
+  margin: 20px;
+}
+
+#container > div {
+  padding: 5px;
+}
+
+.btn1 {
+  background-color: #4676b9;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 10px;
+  float: right;
+  margin-top: 20px;
+  outline: none;
+  cursor: pointer;
+  border-radius: 21px;
+  font-family: "Noto Sans";
+  font-size: 16px;
+  width: 110px;
+  height: 38px;
+  margin-left: calc(100% - 185px);
+}
+
+.register-btn {
+  margin-top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: relative;
+}
+
+.details-btn {
+  float: right;
+}

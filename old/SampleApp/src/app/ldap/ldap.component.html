@@ -1,0 +1,27 @@
+<div class="bg">
+  <app-header [showLogin]="true" [clickableLinks]="false"></app-header>
+  <div class="custom-form">
+    <div class="form-group" *ngIf="passwordEnabled">
+      <form [formGroup]="passwordForm" novalidate class="custom-form">
+        <img src="./assets/logo.png">
+        <app-userinfo></app-userinfo>
+        <p class="o-form-explain"> Sign in </p>
+        <div class="alert-red" *ngIf="errorDiv">
+          {{errorMsg}}
+        </div>
+        <div class="inline-message" *ngIf="inlineMessage">{{inlineMessage}}</div>
+        <input type="password" formControlName="password" placeholder="Password" class="form-control">
+        <div *ngIf="passwordForm.controls['password'].invalid && (passwordForm.controls['password'].dirty || passwordForm.controls['password'].touched)" class="alert alert-danger move-up">
+          <div *ngIf="passwordForm.controls['password'].errors.required" class="alert-red">
+            Password is required.
+          </div>
+        </div>
+        <app-remember-device></app-remember-device>
+        <div id="outer">
+          <div class="inner"> <button class="button primary" (click)="onPasswordSubmit()" [disabled]="passwordForm.pristine || passwordForm.invalid">Sign In</button></div>
+          <div class="inner"> <button class="button secondary" (mousedown)="factorSelect()" *ngIf="factorSelection">Back</button></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

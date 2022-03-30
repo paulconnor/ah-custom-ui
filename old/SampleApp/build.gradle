@@ -1,0 +1,123 @@
+
+buildscript {
+    repositories {
+        maven {
+        url 'https://artifactory-lvn.broadcom.net/artifactory/ims-ssp-maven-dev-local'
+            credentials {
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+            }
+            name = "maven-main-cache"
+        }
+    }
+    dependencies {
+         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.9.6"
+    }
+}
+plugins {
+    id 'base'
+    id "com.jfrog.artifactory" version "4.9.6"
+    id 'maven-publish'
+}
+
+apply plugin: "com.jfrog.artifactory"
+apply plugin: 'maven-publish'
+
+
+def sampleapp = 'sampleapp'
+
+def groupName = 'com.broadcom.layer7authentication'
+if (project.hasProperty("groupName")) {
+   groupName = project.getProperty("groupName")
+
+}
+
+group = "$groupName.$sampleapp"
+
+
+def buildVersion = 'SNAPSHOT'
+if (project.hasProperty("build_version")) {
+   buildVersion = project.getProperty("build_version")
+}
+
+def relVersion = '1.0'
+if (project.hasProperty("release_version")) {
+   relVersion = project.getProperty("release_version")
+}
+
+def publishLatest = 'false'
+if (project.hasProperty("publishLatest")) {
+   publishLatest = project.getProperty("publishLatest")
+
+}
+
+version = "$relVersion-$buildVersion"
+
+def currentGitBranch = getCurrentGitBranch()
+repositories {
+mavenCentral()
+    jcenter()
+    add buildscript.repositories.getByName("maven-main-cache")
+}
+task generateZip(type: Zip) {
+ //delete './dist/sampleapp.zip'
+    from './dist/sampleapp'
+   include '*'
+   include '*/*' //to include contents of a folder present inside directory
+   archiveName 'sampleapp.zip'
+   destinationDir=file('./dist')
+   println 'completed'
+}
+
+artifactory {
+    contextUrl = "${artifactory_contextUrl}"
+    publish {
+        repository {
+             if ( "$currentGitBranch" == "master")
+            {
+                repoKey = 'ims-ssp-maven-release-local'
+            }
+            else
+            {
+                repoKey = 'ims-ssp-maven-dev-local'
+            }
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+        }       
+        defaults {
+     publications ('maven')
+    }
+    }
+}
+
+def zipFile = file("./dist/sampleapp.zip")
+def zipArtifact = artifacts.add('archives', zipFile) {
+    type 'zip'
+   // builtBy 'test'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+		 if ( "$publishLatest" == "true") {
+                     version = 'latest'
+             }
+            artifact zipArtifact
+           /*  version='latest'
+            artifact file("./dist/sampleapp.zip") */
+        }
+    }
+}
+def getCurrentGitBranch() {
+    def gitBranch = "Unknown branch"
+    try {
+        def workingDir = new File("${project.projectDir}")
+        def result = 'git rev-parse --abbrev-ref HEAD'.execute(null, workingDir)
+        result.waitFor()
+        if (result.exitValue() == 0) {
+            gitBranch = result.text.trim()
+        }
+    } catch (e) {
+    }
+    return gitBranch
+}

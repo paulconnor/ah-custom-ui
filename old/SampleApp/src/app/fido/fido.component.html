@@ -1,0 +1,47 @@
+<div class="bg">
+  <app-header [showLogin]="true" [clickableLinks]="false"></app-header>
+  <div class="custom-form">
+    <form [formGroup]="addForm" novalidate class="custom-form" *ngIf="!loginProgress">
+      <div class="form-group" *ngIf="registrationEnabled">
+        <img src="./assets/logo.png"><br>
+        <app-userinfo></app-userinfo>
+        <label *ngIf="displayService.fidoScreenMode==='FIDO'" class="security-key-text">Add biometrics as an authentication method to your account. Assign a friendly name to identify it. </label>
+        <label *ngIf="displayService.fidoScreenMode==='SECURITYKEY'" class="security-key-text">Add a security key as an authentication method to your account. Assign the key a name to identify it. </label>
+        <p *ngIf="displayService.fidoScreenMode==='FIDO'" class="o-form-explain">Friendly name</p>
+        <p *ngIf="displayService.fidoScreenMode==='SECURITYKEY'" class="o-form-explain">Key name</p>
+        <div class="alert-red" *ngIf="errorDiv">
+          {{errorMsg}}
+        </div>
+        <input *ngIf="displayService.fidoScreenMode==='FIDO'" type="text" formControlName="deviceName" placeholder="Enter friendly name" class="form-control" id="deviceName" (keydown.enter)="onRegister()" />
+        <input *ngIf="displayService.fidoScreenMode==='SECURITYKEY'" type="text" formControlName="deviceName" placeholder="Enter your key name" class="form-control" id="deviceName" (keydown.enter)="onRegister()" />
+        <div *ngIf="addForm.controls['deviceName'].invalid && (addForm.controls['deviceName'].dirty || addForm.controls['deviceName'].touched)" class="alert alert-danger move-up">
+          <div *ngIf="displayService.fidoScreenMode==='FIDO' && addForm.controls['deviceName'].errors.required" class="alert-red">
+            Friendly name is required.
+          </div>
+          <div *ngIf="displayService.fidoScreenMode==='SECURITYKEY' && addForm.controls['deviceName'].errors.required" class="alert-red">
+            Key name is required.
+          </div>
+        </div>
+        <div id="outer">
+          <div class="inner"> <button type="button" class="button primary" (click)="onRegister()" [disabled]="fidoRegBtnClicked || addForm.pristine || addForm.invalid">Register</button></div>
+          <div class="inner"> <button type="button" class="button secondary" (mousedown)="factorSelect()" *ngIf="factorSelection">Back</button></div>
+        </div>
+      </div>
+    </form>
+    <div class="form-group" *ngIf="loginProgress">
+      <form class="custom-form">
+        <img src="./assets/logo.png"><br>
+        <app-userinfo></app-userinfo>
+        <p *ngIf="displayService.fidoScreenMode==='FIDO'" class="o-form-explain">Validate your biometric</p>
+        <p *ngIf="displayService.fidoScreenMode==='SECURITYKEY'" class="o-form-explain">Validate your security key</p>
+        <div class="key">
+          <img *ngIf="displayService.fidoScreenMode==='FIDO'" src="./assets/biometric.svg" style="height:70px;padding:20px;" />
+          <img *ngIf="displayService.fidoScreenMode==='SECURITYKEY'" src="./assets/security-key.svg" style="height:70px;padding:20px;" />
+        </div>
+        <app-remember-device></app-remember-device>
+        <button type="button" class="button secondary" (mousedown)="factorSelect()" *ngIf="factorSelection">Back</button>
+        <button type="button" class="button primary" [ngClass]="{'btn-centered':!factorSelection}" *ngIf="fidoService.isInteractionButtonToBeDisplayed() || regLoginVerify || globalService.isRememberDeviceEnabled() || displayService.isFIDOContinousFlow()" (click)="login()" [disabled]="fidoRegVerifyBtnClicked">Next</button>
+      </form>
+    </div>
+  </div>
+</div>

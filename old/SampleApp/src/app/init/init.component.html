@@ -1,0 +1,60 @@
+<div class="bg">
+  <app-header [showLogin]="true" (onLogin)='enableLogin()' [clickableLinks]="false"></app-header>
+  <div class="custom-form">
+    <div class="form-group" *ngIf="initService.loginEnabled">
+      <form [formGroup]="loginForm" novalidate class="custom-form">
+        <img src="./assets/logo.png">
+        <p class="o-form-explain"> Sign In</p>
+        <label *ngIf="initService.settingsMsg" class="settings-label">Please check the values provided in <b> "Settings" </b> before proceeding.</label>
+        <input type="text" formControlName="userName" placeholder="User Name" class="form-control">
+        <div *ngIf="loginForm.controls['userName'].invalid && (loginForm.controls['userName'].dirty || loginForm.controls['userName'].touched)" class="alert alert-danger move-up">
+          <div *ngIf="loginForm.controls['userName'].errors.required" class="alert-red">
+            User Name is required.
+          </div>
+        </div>
+        <label class="rememberme-label" *ngIf="brandingService.getSettings()['featureFlags']['isRememberMeEnabled']" (mousedown)="handleMouseDown($event)">
+          <input class="checkbox" type="checkbox" formControlName="rememberMe">
+          <span>Remember me</span>
+        </label>
+        <button class="button primary" (click)="onLogin()" [disabled]="loginForm.pristine || loginForm.invalid">Next</button>
+        <fa-icon class="topright" alt="settings" [icon]="faCog" (click)="openModal('modal-1')"></fa-icon>
+        <div class="alert-red" *ngIf="errorMsg || initService.errorMsg">
+          {{errorMsg || initService.errorMsg}}
+        </div>
+      </form>
+    </div>
+    <jw-modal id="modal-1">
+      <div class="alert-red settings-error" *ngIf="errorDiv1">
+        {{errorMsg1}}
+      </div>
+      <p class="settings-container">
+        <label>
+          Instructions:
+          <ol type="1">
+            <li> Ensure that the base serviceUrl host is up and running, before proceeding.</li>
+          </ol>
+        </label><br>
+        <label>Client Id: </label>
+        <input type="text" [(ngModel)]="clientId" class="input" />
+        <br>
+        <label>Client Secret: </label>
+        <input type="password" [(ngModel)]="clientSecret" class="input" />
+        <br>
+        <label>Base Service url </label>
+        <input type="text" [(ngModel)]="serviceUrl" class="input" />
+        <br>
+        <label>IP Address: </label>
+        <input type="text" [(ngModel)]="ipAddress" class="input" />
+        <label for="riskTyoe">Risk Type:</label>
+        <select (change)="changeRiskType($event)">
+          <option *ngFor="let riskType of riskTypeList">{{riskType}}</option>
+        </select>
+        <br>
+        <label>
+          Read from local storage:<input type="checkbox" [(ngModel)]="read_local_storage" (change)="onCheckboxChange($event.target.checked)" class="input" /> </label>
+      </p>
+      <button class="button primary" (click)="closeModalSave('modal-1');">generate</button>
+      <button class="button secondary" (mousedown)="closeModalCancel('modal-1');">cancel</button>
+    </jw-modal>
+  </div>
+</div>

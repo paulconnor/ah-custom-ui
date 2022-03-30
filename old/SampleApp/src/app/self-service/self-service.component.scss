@@ -1,0 +1,219 @@
+.self-container {
+  padding: 20px 40px;
+  padding-bottom: 80px;
+  height: calc(100% - 208px);
+  overflow-y: auto;
+  * {
+    box-sizing: border-box;
+    color: #333333;
+    outline: none;
+  }
+  table {
+    border-spacing: 0;
+    width: 100%;
+    th {
+      border-bottom: 1px solid #b3b3b3;
+      text-align: left;
+      padding: 15px;
+      &.first-col {
+        width: 100px;
+      }
+    }
+    td {
+      padding: 10px 15px;
+      .credOTPError {
+        color: #f00;
+        font-size: 12px;
+      }
+    }
+    tr:not(.last-cred-row) {
+      td {
+        border-bottom: 1px solid #b3b3b3;
+      }
+    }
+    tr.last-cred-row {
+      td.first-cell {
+        border-bottom-left-radius: 10px;
+      }
+      td.last-cell {
+        border-bottom-right-radius: 10px;
+      }
+    }
+    tr.cred-row:hover {
+      background-color: #f9f8f8;
+    }
+    .text-center {
+      text-align: center;
+      button {
+        margin: 0 auto;
+      }
+    }
+  }
+  .table-container {
+    border: 1px solid #b3b3b3;
+    border-radius: 10px;
+    margin-bottom: 40px;
+    width: 1200px;
+    overflow: hidden;
+    .credDeleteBtn {
+      background-color: transparent;
+      border: none;
+    }
+    .addedTS {
+      font-size: 12px;
+      color: #626262;
+    }
+  }
+  button {
+    height: 32px;
+    padding: 0 14px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    img {
+      margin-right: 8px;
+      width: 16px;
+    }
+  }
+  select,
+  input {
+    height: 32px;
+    padding: 0 12px;
+    margin: 0;
+  }
+  input[type="radio"] {
+    cursor: pointer;
+  }
+  select {
+    padding-left: 8px;
+    cursor: pointer;
+    width: 100px;
+  }
+  .statusText {
+    font-size: 14px;
+    text-transform: capitalize;
+  }
+  .radio-container {
+    display: flex;
+    margin-bottom: 12px;
+    input {
+      height: auto;
+    }
+    label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    h4 {
+      margin: 0;
+      margin-left: 10px;
+    }
+  }
+  .verify-otp {
+    margin-top: 10px;
+    input {
+      width: 100px;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+    .verifyOTPBtn {
+      background-color: #333333;
+      color: #fff;
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+    }
+  }
+  .register-container {
+    margin-left: 30px;
+    .select-credtype {
+      margin-bottom: 30px;
+    }
+    button {
+      margin-left: 16px;
+    }
+    p {
+      margin: 0;
+      margin-bottom: 16px;
+    }
+  }
+  .error-msg {
+    color: #f00;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 18px;
+    margin-left: 30px;
+  }
+  .input-container {
+    display: flex;
+    position: relative;
+    .regInputField {
+      outline: none;
+      border: 1px solid #333;
+      border-radius: 5px;
+    }
+    .error-msg {
+      margin: 0;
+      position: absolute;
+      left: 0;
+      top: calc(100% + 8px);
+      font-size: 14px;
+    }
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+    .regBtn {
+      background-color: #333333;
+      color: #fff;
+      border-radius: 5px;
+    }
+  }
+  .empty-text {
+    color: rgba($color: #333333, $alpha: 0.5);
+    text-align: center;
+    margin: 30px 0;
+    display: block;
+    width: 1200px;
+  }
+  .refresh-wrapper,
+  .delete-all {
+    display: inline-block;
+    vertical-align: bottom;
+  }
+  .refresh-wrapper {
+    margin-left: 30px;
+    margin-bottom: 10px;
+  }
+  .delete-all {
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+  .action-bar-btn {
+    position: relative;
+    min-width: 115px;
+    cursor: pointer;
+    border: 1px solid #b3b3b3;
+    border-radius: 5px;
+    background-color: transparent;
+    .action-bar-btn-icon {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+    }
+    .action-bar-btn-text {
+      position: absolute;
+      top: 50%;
+      left: 38px;
+      transform: translateY(-50%);
+      font-size: 14px;
+    }
+    &:hover {
+      box-shadow: 0 0 2px #333333;
+    }
+  }
+}

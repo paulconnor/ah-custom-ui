@@ -1,0 +1,84 @@
+.dialogMask {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 5000;
+}
+.confirmDialog {
+  background-color: #fff;
+  height: 200px;
+  width: 450px;
+  min-width: 200px;
+  z-index: 7500;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  padding: 0;
+}
+.confirmDialog .closeIcon {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  cursor: pointer;
+  font-size: 25px;
+  color: #6d7070;
+}
+.confirmDialog .heading {
+  display: block;
+  margin-left: 25px;
+  margin-top: 25px;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: Noto-Sans, Noto Sans, sans-serif;
+  color: #212424;
+}
+.confirmDialog .message {
+  display: block;
+  margin-left: 25px;
+  margin-top: 35px;
+  font-size: 14px;
+  font-family: Noto-Sans, Noto Sans, sans-serif;
+  color: #212424;
+}
+.confirmDialog .btnYes,
+.confirmDialog .btnNo {
+  position: absolute;
+  bottom: 25px;
+  width: 75px;
+  height: 40px;
+  text-align: center;
+}
+.confirmDialog .btn {
+  cursor: pointer;
+  border-radius: 3px;
+  box-sizing: border-box;
+  transition: background-color 0.3s, opacity 0.1s;
+}
+.confirmDialog .btn span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.confirmDialog .btnYes {
+  right: 120px;
+  background-color: #366bb2;
+  color: #fff;
+}
+.confirmDialog .btnYes:hover {
+  background-color: #7297c9;
+}
+.confirmDialog .btnNo {
+  right: 35px;
+  border: 1px solid #366bb2;
+  color: #366bb2;
+}
+.confirmDialog .btnNo:hover {
+  background-color: #7297c9;
+  color: #fff;
+}

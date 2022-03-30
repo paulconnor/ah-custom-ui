@@ -1,0 +1,7 @@
+.userInfoContainer {
+  text-align: center;
+  cursor: pointer;
+}
+.userInfoContainer span {
+  color: #3875bf;
+}
