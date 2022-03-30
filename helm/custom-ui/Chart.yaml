@@ -1,7 +1,0 @@
-apiVersion: v1
-appVersion: 1.16.0
-dependencies:
-description: A Helm chart for sample custom auth ui
-name: custom-ui
-type: application
-version: 0.1.1
