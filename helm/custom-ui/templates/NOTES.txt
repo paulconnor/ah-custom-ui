@@ -1,0 +1,21 @@
+Thank you for installing {{ .Chart.Name }}.
+
+Your release is named {{ .Release.Name }}.
+
+Follow these steps to try out your deployment
+1. Set up your host name resolution by updating your hosts file
+
+   NOTE: it may take a few minutes for the LoadBalander IP to be available.
+
+echo  $(kubectl get svc --namespace {{ .Release.Namespace }} customui-auth -o jsonpath="{.status.loadBalancer.ingress[0].ip}") auth.customui.com
+echo  $(kubectl get svc --namespace {{ .Release.Namespace }} customui-cms -o jsonpath="{.status.loadBalancer.ingress[0].ip}") cms.customui.com
+
+
+2. Update the flowURL parameter on the AuthHub application you will be using
+
+Use Postman to modify the application setting to add the following
+{
+...
+   "flowURL": "http://<IP address for auth.customui.com above>/login",
+...
+}

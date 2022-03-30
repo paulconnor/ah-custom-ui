@@ -25,6 +25,12 @@ spec:
         env:
         - name: CMSURL
           value:  {{ .Values.customui.cmsUrl }}
+        env:
+        - name: CLIENTID
+          value:  {{ .Values.customui.clientId }}
+        env:
+        - name: CLIENTSECRET
+          value:  {{ .Values.customui.clientSecret }}
         ports:
         - hostPort: 80
           name: web

@@ -5,6 +5,8 @@
 
 customui:
   cmsUrl: "http://cms.customui.com:8080/otp.html"
+  clientId: ""
+  clientSecret: ""
   auth:
     name: customui-auth
     port: 80

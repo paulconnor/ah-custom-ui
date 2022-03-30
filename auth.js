@@ -15,6 +15,8 @@ var gFlowState = "";
 var gCredId = "";
 
 var gCMSURL = process.env.CMSURL ||  "http://35.189.9.205:8080/otp.html"
+var gClientId = process.env.CLIENTID ; 
+var gClientSecret = process.env.CLIENTSECRET ;
 
 
 function sspAuthenticate(otpRes) {
@@ -200,10 +202,6 @@ function sspVerifySMS(otpRes,smsCredId,otpValue) {
 
 
 function getToken(otpRes) {
-   var clientId="b845e679-1f42-4608-adca-d8fcd427f027"
-   var clientSecret="255c9beb-be3d-4cab-9fa8-c1b2c97fda8b"
-   //var clientId="ba666fb0-4b10-4b3d-a261-807e178bb826"
-   //var clientSecret="aa10b988-25b1-424e-a5e6-bf85880c553d"
 
    var post_data = querystring.stringify({
       'grant_type' : 'client_credentials',
@@ -216,7 +214,7 @@ function getToken(otpRes) {
       path: '/default/oauth2/v1/token',
       method: 'POST',
       headers: {
-          'Authorization': 'Basic ' + new Buffer(clientId + ':' + clientSecret).toString('base64'),
+          'Authorization': 'Basic ' + new Buffer(gClientId + ':' + gClientSecret).toString('base64'),
           'Content-Type': 'application/x-www-form-urlencoded',
           'Content-Length': Buffer.byteLength(post_data)
       }
@@ -226,8 +224,12 @@ function getToken(otpRes) {
       res.setEncoding('utf8');
       res.on('data', function (chunk) {
           var obj = JSON.parse(chunk);
-          gAccessToken = obj.access_token;
-          sspAuthenticate(otpRes);
+          if (obj.hasOwnProperty('access_token')) { 
+             gAccessToken = obj.access_token;
+             sspAuthenticate(otpRes);
+          } else {
+             console.log ("ERROR - failed to get access token for client")
+          }
       });
   });
 
@@ -255,12 +257,20 @@ app.get('/login', (req, res) => {
   getToken(res);
 })
 
-/*
- * Content Management system content
- */
 
-app.get('/otp.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/otp.html'));
+app.get('/credentials', (req, res) => {
+   if (req.query.hasOwnProperty('clientId')) { 
+      gClientId = req.query.clientId ;
+   } else {
+      console.log ("Client ID not received")
+   }
+   if (req.query.hasOwnProperty('clientSecret')) { 
+      gClientSecret = req.query.clientSecret ;
+   } else {
+      console.log ("Client Secret not received")
+   }
+   console.log ( "client credentials updated : " + req.query.clientId + " / " + req.query.clientSecret);
+   res.send ( "client credentials updated : " + req.query.clientId + " / " + req.query.clientSecret + "\n");
 })
 
 app.post('/otp.html', (req, res) => {
