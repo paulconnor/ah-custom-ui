@@ -21,7 +21,9 @@
 
 > export CLIENTSECRET=\<AuthHub Application Client Secret\>
 
-> helm install custom-ui ah-custom-ui/custom-ui -n custom-ui --set customui.clientId=${CLIENTID} --set customui.clientSecret=${CLIENTSECRET}
+> helm install custom-ui ah-custom-ui/custom-ui -n custom-ui \\  
+>     --set customui.clientId=${CLIENTID} \\  
+>     --set customui.clientSecret=${CLIENTSECRET}
 
 ....Wait for the Pods and Services to complete startup. This could take several minutes 
 
