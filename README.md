@@ -34,13 +34,13 @@
 > kubectl get pods,svc -n custom-ui
 
 
-## 3. Update your DNS or hosts file with the following
+## 4. Update your DNS or hosts file with the following
 
 > kubectl get svc -n custom-ui | grep customui-auth | awk '{print $4 " auth.customui.com" }'
 
 > kubectl get svc -n custom-ui | grep customui-cms | awk '{print $4 " cms.customui.com" }'
 
-## 4. Update the flowURL parameter on the AuthHub application you will be using
+## 5. Update the flowURL parameter on the AuthHub application you will be using
 
 {  
   ...  
