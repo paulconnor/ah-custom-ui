@@ -6,7 +6,6 @@
 - User credentials exist for SMSOTP
 - AuthHub application to be used has clientCredentials grant and similar Authorization rights as the demoClient.
 
-
 ## 1. Add the Helm Chart and deploy
 
 > helm repo add ah-custom-ui https://paulconnor.github.io/ah-custom-ui/
