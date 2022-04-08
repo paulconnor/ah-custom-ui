@@ -29,6 +29,8 @@ spec:
           value:  {{ .Values.customui.clientId }}
         - name: CLIENTSECRET
           value:  {{ .Values.customui.clientSecret }}
+        - name: SSPHOST
+          value:  {{ .Values.customui.sspHost }}
         ports:
         - hostPort: 80
           name: web

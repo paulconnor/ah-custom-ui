@@ -17,6 +17,7 @@ var gCredId = "";
 var gCMSURL = process.env.CMSURL ||  "http://35.189.9.205:8080/otp.html"
 var gClientId = process.env.CLIENTID ; 
 var gClientSecret = process.env.CLIENTSECRET ;
+var gSspHost = process.env.SSPHOST  ;
 
 
 function sspAuthenticate(otpRes) {
@@ -34,7 +35,7 @@ function sspAuthenticate(otpRes) {
    
    
       var post_options = {
-         host: 'ssp-22.iamdemo.broadcom.com',
+         host: gSspHost ,
          port: '443',
          path: '/default/auth/v1/authenticate',
          method: 'POST',
@@ -88,7 +89,7 @@ function sspAuthSMS(otpRes) {
       });
    
       var post_options = {
-         host: 'ssp-22.iamdemo.broadcom.com',
+         host: gSspHost ,
          port: '443',
          path: '/default/auth/v1/SelectedFactor',
          method: 'POST',
@@ -129,7 +130,7 @@ function sspSendSMS(otpRes,smsCredId) {
       });
 
       var post_options = {
-         host: 'ssp-22.iamdemo.broadcom.com',
+         host: gSspHost ,
          port: '443',
          path: '/default/factor/v1/OTPGenerator',
          method: 'POST',
@@ -170,7 +171,7 @@ function sspVerifySMS(otpRes,smsCredId,otpValue) {
       });
 
       var post_options = {
-         host: 'ssp-22.iamdemo.broadcom.com',
+         host: gSspHost ,
          port: '443',
          path: '/default/factor/v1/OTPVerifier',
          method: 'POST',
@@ -209,7 +210,7 @@ function getToken(otpRes) {
   });
 
   var post_options = {
-      host: 'ssp-22.iamdemo.broadcom.com',
+      host: gSspHost ,
       port: '443',
       path: '/default/oauth2/v1/token',
       method: 'POST',
