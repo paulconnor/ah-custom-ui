@@ -25,7 +25,10 @@
 
 > export CLIENTSECRET=\<AuthHub Application Client Secret\>
 
+> export SSPHOST=\<AuthHub SSP Host FQDN\>
+
 > helm install custom-ui ah-custom-ui/custom-ui -n custom-ui \\  
+>     --set customui.sspHost=${SSPHOST} \\  
 >     --set customui.clientId=${CLIENTID} \\  
 >     --set customui.clientSecret=${CLIENTSECRET}
 
