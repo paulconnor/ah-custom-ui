@@ -7,7 +7,8 @@
 
 ## 1. Create AuthHub application and policy for the custom-ui application  
 
-- AuthHub application: clientCredentials grant and similar Authorization rights as the demoClient.  
+- AuthHub application: clientCredentials grant and similar Authorization rights as the demoClient.
+*** Be sure to edit the application and the authorization policy in Authhub    
 - AuthHub policy: include SMSOTP for second factor only  
 
 ## 2. Add the Helm Chart and deploy
